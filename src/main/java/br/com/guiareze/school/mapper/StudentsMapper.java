@@ -12,5 +12,6 @@ public interface StudentsMapper {
 	StudentsMapper INSTANCE = Mappers.getMapper(StudentsMapper.class);
 
 	Students studentsRequestDTOToStudents(StudentsRequestDTO studentsRequestDTO);
+	StudentsRequestDTO studentsToStudentsRequestDTO(Students students);
 
 }
