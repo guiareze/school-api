@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.com.guiareze.school.mapper.StudentsMapper;
 import br.com.guiareze.school.model.Students;
 import br.com.guiareze.school.model.dto.StudentsRequestDTO;
 import br.com.guiareze.school.model.dto.StudentsResponseDTO;
@@ -21,7 +20,10 @@ public class StudentsServiceImpl implements StudentsService {
 	@Override
 	public StudentsResponseDTO create(StudentsRequestDTO studentsRequestDTO) {
 		try {
-			Students student  = StudentsMapper.INSTANCE.studentsRequestDTOToStudents(studentsRequestDTO);
+			Students student = Students.builder()
+					                   .name(studentsRequestDTO.getName())
+					                   .age(studentsRequestDTO.getAge())
+									   .birthdayDate(studentsRequestDTO.getBirthdayDate()).build();
 			studentsRepository.save(student);
 			StudentsResponseDTO studentsResponseDTO = StudentsResponseDTO.builder()
 																		 .responseCode("OK")
